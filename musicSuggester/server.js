@@ -12,7 +12,7 @@ console.log("connecting--",db)
 mongoose.connect(db.url, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //Frontend routes
-app.get('/', (req,res)  => res.send('Welcome to Music Suggester'));
+app.get('/', (req,res)  => res.sendFile('./index.html', {root: __dirname}));
 
 //Defining Route
 app.get('/route', function(req, res){
