@@ -1,0 +1,27 @@
+{
+  "name": "musicsuggester",
+  "version": "1.0.0",
+  "description": "Music Suggester project for COSC 412",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Catchco1/COSC412Triangles.git"
+  },
+  "keywords": [
+    "Music",
+    "MEAN",
+    "Suggester"
+  ],
+  "author": "Team Triangles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Catchco1/COSC412Triangles/issues"
+  },
+  "homepage": "https://github.com/Catchco1/COSC412Triangles#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
