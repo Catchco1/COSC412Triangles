@@ -2,6 +2,7 @@ from requests import get
 from requests.exceptions import RequestException
 from contextlib import closing
 from bs4 import BeautifulSoup
+import json
 
 def simple_get(url):
     try:
@@ -21,7 +22,17 @@ def is_good_response(resp):
 def log_error(e):
     print(e)
 
-raw_html = simple_get('https://trashbagponchos.bandcamp.com/album/not-safe-for-working-class')
-html = BeautifulSoup(raw_html, 'html.parser')
-for h2 in html.select('h2'):
-        print(h2.text)
+def getTags(url):
+    raw_html = simple_get(url)
+    html = BeautifulSoup(raw_html, 'html.parser')
+    tags = html.findAll('a', {'class':'tag'})
+    return tags
+
+def main():
+    tags = getTags('https://trashbagponchos.bandcamp.com/album/not-safe-for-working-class')
+    print(tags.json)
+    for tag in tags:
+        print(tag.text.lower())
+
+if __name__ == '__main__':
+    main()
