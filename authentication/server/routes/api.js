@@ -10,7 +10,7 @@ mongoose.connect(db, function(err){
     if(err){
         console.error('Error! ' + err)
     } else {
-      console.log('Connected to mongodb')      
+      console.log('Connected to mongodb')
     }
 });
 
@@ -20,11 +20,11 @@ function verifyToken(req, res, next) {
   }
   let token = req.headers.authorization.split(' ')[1]
   if(token === 'null') {
-    return res.status(401).send('Unauthorized request')    
+    return res.status(401).send('Unauthorized request')
   }
   let payload = jwt.verify(token, 'secretKey')
   if(!payload) {
-    return res.status(401).send('Unauthorized request')    
+    return res.status(401).send('Unauthorized request')
   }
   req.userId = payload.subject
   next()
@@ -72,8 +72,8 @@ router.get('/events', (req,res) => {
   res.json(events)
 })
 
-router.get('/special', verifyToken, (req, res) => {
-  let specialEvents = [
+router.get('/account', verifyToken, (req, res) => {
+  let account = [
     {
       "_id": "1",
       "name": "Auto Expo Special",
@@ -111,7 +111,7 @@ router.get('/special', verifyToken, (req, res) => {
       "date": "2012-04-23T18:25:43.511Z"
     }
   ]
-  res.json(specialEvents)
+  res.json(account)
 })
 
 router.post('/register', (req, res) => {
@@ -119,7 +119,7 @@ router.post('/register', (req, res) => {
   let user = new User(userData)
   user.save((err, registeredUser) => {
     if (err) {
-      console.log(err)      
+      console.log(err)
     } else {
       let payload = {subject: registeredUser._id}
       let token = jwt.sign(payload, 'secretKey')
@@ -129,14 +129,15 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
+  console.log("posted to database")
   let userData = req.body
   User.findOne({email: userData.email}, (err, user) => {
     if (err) {
-      console.log(err)    
+      console.log(err)
     } else {
       if (!user) {
         res.status(401).send('Invalid Email')
-      } else 
+      } else
       if ( user.password !== userData.password) {
         res.status(401).send('Invalid Password')
       } else {
