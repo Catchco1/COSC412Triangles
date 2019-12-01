@@ -14,6 +14,8 @@ import { AuthService } from './auth.service';
 import { EventService } from './event.service';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { AccountComponent } from './account/account.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { FeedbacksComponent } from './feedbacks/feedbacks.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { AccountComponent } from './account/account.component';
     RegisterComponent,
     EventsComponent,
     SpecialEventsComponent,
-    AccountComponent
+    AccountComponent,
+    ResetpasswordComponent,
+    FeedbacksComponent
   ],
   imports: [
     BrowserModule,

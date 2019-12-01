@@ -1,6 +1,22 @@
 <!doctype html>
 <html lang="en">
 
+<script type="text/JavaScript">
+    var hidden =false;
+    function hideButton(){
+        var checkem = document.getElementById('email').value;
+        var checkpass = document.getElementById('password').value;
+
+        if(checkem == ""){
+            ;
+        }
+        if(checkpass == ""){
+            alert("Password is empty");
+        };
+        if(checkem =="" && checkpass =="")
+            return true;
+    }
+</script>
 <head>
   <meta charset="utf-8">
   <title>PlaylistPal</title>
