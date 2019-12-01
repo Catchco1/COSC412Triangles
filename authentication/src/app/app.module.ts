@@ -14,6 +14,8 @@ import { AuthService } from './auth.service';
 import { EventService } from './event.service';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { AccountComponent } from './account/account.component';
+import {BandsApiService} from './bands/bands_api.service';
+import { BandsComponent } from './bands/bands.component';
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { AccountComponent } from './account/account.component';
     RegisterComponent,
     EventsComponent,
     SpecialEventsComponent,
-    AccountComponent
+    AccountComponent,
+    BandsComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,7 @@ import { AccountComponent } from './account/account.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AuthService, AuthGuard, EventService, 
+  providers: [AuthService, AuthGuard, EventService, BandsApiService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
