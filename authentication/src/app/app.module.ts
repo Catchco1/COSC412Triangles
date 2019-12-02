@@ -16,6 +16,8 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { AccountComponent } from './account/account.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { FeedbacksComponent } from './feedbacks/feedbacks.component';
+import {BandsApiService} from './bands/bands_api.service';
+import { BandsComponent } from './bands/bands.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { FeedbacksComponent } from './feedbacks/feedbacks.component';
     SpecialEventsComponent,
     AccountComponent,
     ResetpasswordComponent,
-    FeedbacksComponent
+    FeedbacksComponent,
+    BandsComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { FeedbacksComponent } from './feedbacks/feedbacks.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AuthService, AuthGuard, EventService, 
+  providers: [AuthService, AuthGuard, EventService, BandsApiService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
