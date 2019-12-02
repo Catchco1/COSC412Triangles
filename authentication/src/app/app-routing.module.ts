@@ -6,6 +6,7 @@ import { EventsComponent } from './events/events.component';
 import { SpecialEventsComponent } from './special-events/special-events.component';
 import { AuthGuard } from './auth.guard';
 import {AccountComponent} from './account/account.component';
+import{ BandsComponent } from './bands/bands.component'
 
 const routes: Routes = [
   {
@@ -33,7 +34,11 @@ const routes: Routes = [
   {
     path: 'special',
     component: SpecialEventsComponent
-  }
+  },
+  {
+    path: 'bands',
+    component: BandsComponent
+  },
 ];
 
 @NgModule({
