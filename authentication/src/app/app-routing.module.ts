@@ -6,7 +6,10 @@ import { EventsComponent } from './events/events.component';
 import { SpecialEventsComponent } from './special-events/special-events.component';
 import { AuthGuard } from './auth.guard';
 import {AccountComponent} from './account/account.component';
+import {ResetpasswordComponent} from './resetpassword/resetpassword.component';
+import {FeedbacksComponent} from './feedbacks/feedbacks.component';
 import{ BandsComponent } from './bands/bands.component'
+
 
 const routes: Routes = [
   {
@@ -36,6 +39,13 @@ const routes: Routes = [
     component: SpecialEventsComponent
   },
   {
+    path: 'reset',
+    component : ResetpasswordComponent
+  },
+  {
+    path: 'feedback',
+    component : FeedbacksComponent
+  },
     path: 'bands',
     component: BandsComponent
   },

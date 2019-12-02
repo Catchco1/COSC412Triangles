@@ -14,6 +14,8 @@ import { AuthService } from './auth.service';
 import { EventService } from './event.service';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { AccountComponent } from './account/account.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { FeedbacksComponent } from './feedbacks/feedbacks.component';
 import {BandsApiService} from './bands/bands_api.service';
 import { BandsComponent } from './bands/bands.component';
 
@@ -26,6 +28,8 @@ import { BandsComponent } from './bands/bands.component';
     EventsComponent,
     SpecialEventsComponent,
     AccountComponent,
+    ResetpasswordComponent,
+    FeedbacksComponent,
     BandsComponent,
   ],
   imports: [

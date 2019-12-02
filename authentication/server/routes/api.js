@@ -3,7 +3,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken')
-const db = "mongodb+srv://Root:Din0saur@cluster0-lakt4.mongodb.net/test?retryWrites=true&w=majority";
+const db = "mongodb+srv://Root:Din0saur@cluster0-lakt4.mongodb.net/musicApp?retryWrites=true&w=majority";
+const bcrypt = require('bcrypt');
+
 // mongoose.Promise = global.Promise;
 
 mongoose.connect(db, function(err){
@@ -31,86 +33,12 @@ function verifyToken(req, res, next) {
 }
 
 router.get('/events', (req,res) => {
-  let events = [
-    {
-      "_id": "1",
-      "name": "Auto Expo",
-      "description": "lorem ipsum",
-      "date": "2012-04-23T18:25:43.511Z"
-    },
-    {
-      "_id": "2",
-      "name": "Auto Expo",
-      "description": "lorem ipsum",
-      "date": "2012-04-23T18:25:43.511Z"
-    },
-    {
-      "_id": "3",
-      "name": "Auto Expo",
-      "description": "lorem ipsum",
-      "date": "2012-04-23T18:25:43.511Z"
-    },
-    {
-      "_id": "4",
-      "name": "Auto Expo",
-      "description": "lorem ipsum",
-      "date": "2012-04-23T18:25:43.511Z"
-    },
-    {
-      "_id": "5",
-      "name": "Auto Expo",
-      "description": "lorem ipsum",
-      "date": "2012-04-23T18:25:43.511Z"
-    },
-    {
-      "_id": "6",
-      "name": "Auto Expo",
-      "description": "lorem ipsum",
-      "date": "2012-04-23T18:25:43.511Z"
-    }
-  ]
+
   res.json(events)
 })
 
 router.get('/account', verifyToken, (req, res) => {
-  let account = [
-    {
-      "_id": "1",
-      "name": "Auto Expo Special",
-      "description": "lorem ipsum",
-      "date": "2012-04-23T18:25:43.511Z"
-    },
-    {
-      "_id": "2",
-      "name": "Auto Expo Special",
-      "description": "lorem ipsum",
-      "date": "2012-04-23T18:25:43.511Z"
-    },
-    {
-      "_id": "3",
-      "name": "Auto Expo Special",
-      "description": "lorem ipsum",
-      "date": "2012-04-23T18:25:43.511Z"
-    },
-    {
-      "_id": "4",
-      "name": "Auto Expo Special",
-      "description": "lorem ipsum",
-      "date": "2012-04-23T18:25:43.511Z"
-    },
-    {
-      "_id": "5",
-      "name": "Auto Expo Special",
-      "description": "lorem ipsum",
-      "date": "2012-04-23T18:25:43.511Z"
-    },
-    {
-      "_id": "6",
-      "name": "Auto Expo Special",
-      "description": "lorem ipsum",
-      "date": "2012-04-23T18:25:43.511Z"
-    }
-  ]
+
   res.json(account)
 })
 
@@ -132,21 +60,24 @@ router.post('/login', (req, res) => {
   console.log("posted to database")
   let userData = req.body
   User.findOne({email: userData.email}, (err, user) => {
-    if (err) {
-      console.log(err)
+    if (user===null) {
+      return res.status(400).send({
+        message : "User not found."
+      });
     } else {
-      if (!user) {
-        res.status(401).send('Invalid Email')
-      } else
-      if ( user.password !== userData.password) {
-        res.status(401).send('Invalid Password')
+      if (user.ValidPassword(userData.password)) {
+        return res.status(201).send({
+          message : "User logged in",
+        })
       } else {
-        let payload = {subject: user._id}
-        let token = jwt.sign(payload, 'secretKey')
-        res.status(200).send({token})
+        return res.status(400).send({
+          message : "wrong password"
+        });
       }
     }
-  })
+  });
 })
+
+
 
 module.exports = router;
