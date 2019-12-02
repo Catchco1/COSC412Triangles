@@ -46,6 +46,7 @@ const routes: Routes = [
     path: 'feedback',
     component : FeedbacksComponent
   },
+  {
     path: 'bands',
     component: BandsComponent
   },
