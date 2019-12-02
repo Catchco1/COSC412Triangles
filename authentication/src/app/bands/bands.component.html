@@ -2,6 +2,7 @@
     <h1>Bands</h1>
   </div>
   <h2>Here are the Bands so far: </h2>
+  <input type="text" (keyup.enter) = "onEnter($event.target.value)"/>
   <ul>
     <!-- <li *ngFor="let band of bandList">
       {{band.band}}

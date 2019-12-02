@@ -10,16 +10,25 @@ import {Bands} from './bands.model';
     templateUrl: './bands.component.html',
     styleUrls: ['./bands.component.css']
   })
-  export class BandsComponent implements OnInit {
+  export class BandsComponent {
     bandsListSubs: Subscription;
     bandsList: any;
   
     constructor(private bandsApi: BandsApiService) {
     }
   
-    ngOnInit() {
+    // ngOnInit() {
+    //   this.bandsListSubs = this.bandsApi
+    //     .getBands(this.search)
+    //     .subscribe(res => {
+    //         this.bandsList = res;
+    //       },
+    //       console.error
+    //     );
+    // }
+    onEnter(search) {
       this.bandsListSubs = this.bandsApi
-        .getBands()
+        .getBands(search)
         .subscribe(res => {
             this.bandsList = res;
           },

@@ -14,7 +14,8 @@ export class BandsApiService {
     return Observable.throw(err.message || 'Error: Unable to complete request.');
   }
 
-  getBands(): Observable<any> {
-    return this.http.get<any>(`${API_URL}/bands`);
+  getBands(bandName): Observable<any> {
+    console.log('test')
+    return this.http.get<any>(encodeURI(`${API_URL}/bands?name=` + bandName));
   }
 }
