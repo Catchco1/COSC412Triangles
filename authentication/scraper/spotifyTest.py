@@ -3,7 +3,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import json
 from flask import Flask
 from flask_cors import CORS
-from flask import request
+from flask import request 
 
 app = Flask(__name__)
 CORS(app, resources={r"/bands/*": {"origins": "*"}})
@@ -23,4 +23,4 @@ def getRelatedBands():
     for artist in related:
         names += [artist['name']]
     output['related'] = names
-    return json.dumps(output)
+    return output
