@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../auth.service';
-import { Router } from '@angular/router';
 import {Subscription} from 'rxjs';
 import {BandsApiService} from './bands_api.service';
-import {Bands} from './bands.model';
 
 @Component({
     selector: 'app-bands',
@@ -12,7 +9,9 @@ import {Bands} from './bands.model';
   })
   export class BandsComponent {
     bandsListSubs: Subscription;
-    bandsList: any;
+    bandsSpotifyList: any;
+    bandsAIList : any;
+    test : any;
   
     constructor(private bandsApi: BandsApiService) {
     }
@@ -26,11 +25,23 @@ import {Bands} from './bands.model';
     //       console.error
     //     );
     // }
-    onEnter(search) {
+    onSpotifyEnter(search) {
       this.bandsListSubs = this.bandsApi
-        .getBands(search)
+        .getSpotifyBands(search)
         .subscribe(res => {
-            this.bandsList = res;
+            this.bandsSpotifyList = res;
+          },
+          console.error
+        );
+    }
+    onAIEnter(search) {
+      this.bandsListSubs = this.bandsApi
+        .getAIBands(search)
+        .subscribe(res => {
+            this.test = []
+            for(var i = 1; i < 10; i++)
+              this.test.push(res[i])
+            this.bandsAIList = this.test;
           },
           console.error
         );

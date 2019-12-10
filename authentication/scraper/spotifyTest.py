@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify, render_template
 import pandas as pd
 
 app = Flask(__name__)
-CORS(app, resources={r"/bands/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route('/bands')
@@ -38,9 +38,9 @@ def predict_api():
     rt = df.iloc[0]
 
     #Get request from the search terms
-    search = request.args.get('search')
-    #print(search)
-    search = search.replace("+", " ").upper()
+    search = request.args.get('search', default = '*', type = str).upper()
+    print(search)
+    #search = search.replace("+", " ").upper()
 
     #Finds the search term
     for j in range (0, df.shape[0]):
@@ -67,4 +67,5 @@ def predict_api():
     #we failed to find a match
     print(rt)
     rt = pd.Series(rt).to_json()
-    return jsonify(rt)
+    return rt
+   # return jsonify(rt)
