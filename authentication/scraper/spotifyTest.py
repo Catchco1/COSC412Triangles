@@ -1,12 +1,12 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import json
-from flask import Flask
 from flask_cors import CORS
-from flask import request 
+from flask import Flask, request, jsonify, render_template
+import pandas as pd
 
 app = Flask(__name__)
-CORS(app, resources={r"/bands/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route('/bands')
@@ -24,3 +24,39 @@ def getRelatedBands():
         names += [artist['name']]
     output['related'] = names
     return output
+
+@app.route('/predict_api',methods=['GET'])
+def predict_api():
+    '''
+    For direct API calls trought request
+    '''
+    #Find the file that Model2.py made
+    #should be replaced with your directory.
+    DIR_PATH =(r".//final.json")
+    df = pd.read_json (DIR_PATH)
+    
+    rt = df.iloc[0]
+
+    #Get request from the search terms
+    search = request.args.get('search', default = '*', type = str).upper()
+    print(search)
+    #search = search.replace("+", " ").upper()
+
+    #Finds the search term
+    for j in range (0, df.shape[0]):
+        if df[0][j].upper() == search: #print (j)
+            break
+    rt = df.iloc[j]
+   
+   #Returns this if there is no match
+    if j == df.shape[0]-1:
+        rt = {
+            "0":"Unavailable" }
+
+    
+    #Takes rt and turns it into a series, only applies if 
+    #we failed to find a match
+    print(rt)
+    rt = pd.Series(rt).to_json()
+    return rt
+   # return jsonify(rt)

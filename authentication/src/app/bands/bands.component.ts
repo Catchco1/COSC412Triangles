@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../auth.service';
-import { Router } from '@angular/router';
 import {Subscription} from 'rxjs';
 import {BandsApiService} from './bands_api.service';
-import {Bands} from './bands.model';
 
 @Component({
     selector: 'app-bands',
@@ -11,26 +8,28 @@ import {Bands} from './bands.model';
     styleUrls: ['./bands.component.css']
   })
   export class BandsComponent {
-    bandsListSubs: Subscription;
-    bandsList: any;
+    bandsSpotifyListSubs: Subscription;
+    bandsAIListSubs: Subscription;
+    bandsSpotifyList: any;
+    bandsAIList : any;
   
-    constructor(private bandsApi: BandsApiService) {
-    }
-  
-    // ngOnInit() {
-    //   this.bandsListSubs = this.bandsApi
-    //     .getBands(this.search)
-    //     .subscribe(res => {
-    //         this.bandsList = res;
-    //       },
-    //       console.error
-    //     );
-    // }
-    onEnter(search) {
-      this.bandsListSubs = this.bandsApi
-        .getBands(search)
+    constructor(private bandsApi: BandsApiService) {}
+    onSpotifyEnter(search) {
+      this.bandsSpotifyListSubs = this.bandsApi
+        .getSpotifyBands(search)
         .subscribe(res => {
-            this.bandsList = res;
+            this.bandsSpotifyList = res;
+          },
+          console.error
+        );
+    }
+    onAIEnter(search) {
+      this.bandsAIListSubs = this.bandsApi
+        .getAIBands(search)
+        .subscribe(res => {
+            for(var i in res)
+              this.test.push(res[i])
+            this.bandsAIList = this.test;
           },
           console.error
         );
