@@ -8,25 +8,14 @@ import {BandsApiService} from './bands_api.service';
     styleUrls: ['./bands.component.css']
   })
   export class BandsComponent {
-    bandsListSubs: Subscription;
+    bandsSpotifyListSubs: Subscription;
+    bandsAIListSubs: Subscription;
     bandsSpotifyList: any;
     bandsAIList : any;
-    test : any;
   
-    constructor(private bandsApi: BandsApiService) {
-    }
-  
-    // ngOnInit() {
-    //   this.bandsListSubs = this.bandsApi
-    //     .getBands(this.search)
-    //     .subscribe(res => {
-    //         this.bandsList = res;
-    //       },
-    //       console.error
-    //     );
-    // }
+    constructor(private bandsApi: BandsApiService) {}
     onSpotifyEnter(search) {
-      this.bandsListSubs = this.bandsApi
+      this.bandsSpotifyListSubs = this.bandsApi
         .getSpotifyBands(search)
         .subscribe(res => {
             this.bandsSpotifyList = res;
@@ -35,11 +24,10 @@ import {BandsApiService} from './bands_api.service';
         );
     }
     onAIEnter(search) {
-      this.bandsListSubs = this.bandsApi
+      this.bandsAIListSubs = this.bandsApi
         .getAIBands(search)
         .subscribe(res => {
-            this.test = []
-            for(var i = 1; i < 10; i++)
+            for(var i in res)
               this.test.push(res[i])
             this.bandsAIList = this.test;
           },

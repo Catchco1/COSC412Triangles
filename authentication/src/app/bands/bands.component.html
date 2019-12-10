@@ -3,6 +3,8 @@
   </div>
   <h2>Here are the Bands so far: </h2>
   <input type="text" #data/>
+<br/>
+<br/>
   <button type="submit" (click) = 'onSpotifyEnter(data.value)'>Search Spotify</button>
   <ul>
     <li *ngFor="let band of bandsSpotifyList.related">
@@ -11,10 +13,7 @@
   </ul>
   <button type="submit" (click) = 'onAIEnter(data.value)'>Search Using AI</button>
   <ul>
-    <li *ngFor="let band of bandsAIList">
-      {{ band }}
+    <li *ngFor="let bands of bandsAIList">
+      {{ bands }}
     </li>
   </ul>
-  <!-- <div *ngFor="let band of bandsList['related']"></div> -->
-  
-  

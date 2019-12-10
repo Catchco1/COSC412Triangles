@@ -51,16 +51,7 @@ def predict_api():
    #Returns this if there is no match
     if j == df.shape[0]-1:
         rt = {
-            "0":"0",
-            "1":"1",
-            "2":"2",
-            "3":"3",
-            "4":"4",
-            "5":"5", 
-            "6":"6",
-            "7":"7",
-            "8":"8",
-            "9":"9"}
+            "0":"Unavailable" }
 
     
     #Takes rt and turns it into a series, only applies if 
