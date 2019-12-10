@@ -12,6 +12,7 @@ import {BandsApiService} from './bands_api.service';
     bandsAIListSubs: Subscription;
     bandsSpotifyList: any;
     bandsAIList : any;
+    test : any;
   
     constructor(private bandsApi: BandsApiService) {}
     onSpotifyEnter(search) {
