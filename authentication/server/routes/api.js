@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken')
 const db = "mongodb+srv://Root:Din0saur@cluster0-lakt4.mongodb.net/musicApp?retryWrites=true&w=majority";
-const bcrypt = require('bcrypt');
+
 
 // mongoose.Promise = global.Promise;
 
