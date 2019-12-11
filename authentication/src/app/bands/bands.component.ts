@@ -28,6 +28,7 @@ import {BandsApiService} from './bands_api.service';
       this.bandsAIListSubs = this.bandsApi
         .getAIBands(search)
         .subscribe(res => {
+            this.test = []
             for(var i in res)
               this.test.push(res[i])
             this.bandsAIList = this.test;
